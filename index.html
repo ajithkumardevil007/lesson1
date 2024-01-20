@@ -52,27 +52,22 @@ The volume of gas left after cooling to room temperature is?", correctAnswer: 1 
                     resultMessage = "Incorrect. The correct answer is " + correctAnswer;
                 }
 
-                // Display the result
-                document.getElementById("result-message").innerText = resultMessage;
-
                 // Move to the next question or end the quiz
                 currentQuestion++;
                 if (currentQuestion < questions.length) {
-                    setTimeout(function () {
-                        document.getElementById("question-text").innerText = questions[currentQuestion].question;
-                        document.getElementById("answer-options").value = 0;
-                        document.getElementById("result-message").innerText = ""; // Clear previous result
-                    }, 1000); // Delay for 1 second to show the result
+                    document.getElementById("question-text").innerText = questions[currentQuestion].question;
+                    document.getElementById("answer-options").value = 0;
                 } else {
                     document.getElementById("quiz-container").style.display = "none";
-                    displayQuizResults();
+                    displayQuizResults(resultMessage);
                 }
             } else {
                 document.getElementById("result-message").innerText = "Please select an answer.";
             }
         }
 
-        function displayQuizResults() {
+        function displayQuizResults(finalMessage) {
+            document.getElementById("result-message").innerText = finalMessage;
             var resultMessage = "Quiz Results:";
             resultMessage += "\nTotal Correct Answers: " + correctAnswers;
             resultMessage += "\nIncorrect Answers: " + (questions.length - correctAnswers);
