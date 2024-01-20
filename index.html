@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chemistry Test</title>
+</head>
+<body>
+    <h1>chemistry Test</h1>
+
+    <div id="quiz-container">
+        <p id="question-text"> 1. 40 ml of methane is completely burnt using 80 ml of oxygen at room temperature. The volume of gas left after cooling to room temperature is ?</p>
+        <select id="answer-options">
+            <option value="0">Select an answer</option>
+            <option value="1">(a) 40 ml CO2 gas</option>
+            <option value="2">(b) 40 ml CO2 gas and 80 ml H2O gas</option>
+            <option value="3">(c) 60 ml CO2 gas and 60 ml H2O gas</option>
+            <option value="4">(d) 120 ml CO2 gas</option>
+        </select>
+        <button onclick="checkAnswer()">Submit</button>
+    </div>
+
+    <p id="result-message"></p>
+
+    <script>
+        var questions = [
+            { question: " 1. 40 ml of methane is completely burnt using 80 ml of oxygen at room temperature. The volume of gas left after cooling to room temperature is ?", correctAnswer: 1 },
+            // Add more questions here...
+        ];
+
+        var currentQuestion = 0;
+        var correctAnswers = 0;
+
+        function checkAnswer() {
+            var selectedAnswer = document.getElementById("answer-options").value;
+            var correctAnswer = questions[currentQuestion].correctAnswer;
+
+            if (selectedAnswer != 0) {
+                if (parseInt(selectedAnswer) === correctAnswer) {
+                    correctAnswers++;
+                    document.getElementById("result-message").innerText = "Correct!";
+                } else {
+                    document.getElementById("result-message").innerText = "Incorrect. The correct answer is " + correctAnswer;
+                }
+
+                // Move to the next question or end the quiz
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    document.getElementById("question-text").innerText = questions[currentQuestion].question;
+                    document.getElementById("answer-options").value = 0;
+                } else {
+                    document.getElementById("quiz-container").style.display = "none";
+                    document.getElementById("result-message").innerText = "Total Correct Answers: " + correctAnswers;
+                }
+            } else {
+                document.getElementById("result-message").innerText = "Please select an answer.";
+            }
+        </script>
+</body>
+</html>
