@@ -3,58 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chemistry Test</title>
+    <title>Quiz Test</title>
 </head>
 <body>
-    <h1>chemistry Test</h1>
+    <h1>Quiz Test</h1>
 
     <div id="quiz-container">
-        <p id="question-text"> 1. 40 ml of methane is completely burnt using 80 ml of oxygen at room temperature. The volume of gas left after cooling to room temperature is ?</p>
+        <p id="question-text">What is the capital of France?</p>
         <select id="answer-options">
             <option value="0">Select an answer</option>
-            <option value="1">(a) 40 ml CO2 gas</option>
-            <option value="2">(b) 40 ml CO2 gas and 80 ml H2O gas</option>
-            <option value="3">(c) 60 ml CO2 gas and 60 ml H2O gas</option>
-            <option value="4">(d) 120 ml CO2 gas</option>
+            <option value="1">Berlin</option>
+            <option value="2">Madrid</option>
+            <option value="3">Paris</option>
+            <option value="4">Rome</option>
         </select>
         <button onclick="checkAnswer()">Submit</button>
+        <p id="result-message"></p>
     </div>
-
-    <p id="result-message"></p>
 
     <script>
         var questions = [
-            { question: " 1. 40 ml of methane is completely burnt using 80 ml of oxygen at room temperature. The volume of gas left after cooling to room temperature is ?", correctAnswer: 1 },
+            { question: "What is the capital of France?", correctAnswer: 3 },
             // Add more questions here...
         ];
 
         var currentQuestion = 0;
         var correctAnswers = 0;
+        var incorrectAnswers = [];
 
         function checkAnswer() {
             var selectedAnswer = document.getElementById("answer-options").value;
             var correctAnswer = questions[currentQuestion].correctAnswer;
 
             if (selectedAnswer != 0) {
+                var resultMessage = "";
+
                 if (parseInt(selectedAnswer) === correctAnswer) {
                     correctAnswers++;
-                    document.getElementById("result-message").innerText = "Correct!";
+                    resultMessage = "Correct!";
                 } else {
-                    document.getElementById("result-message").innerText = "Incorrect. The correct answer is " + correctAnswer;
+                    incorrectAnswers.push(currentQuestion + 1); // Save the incorrect question number
+                    resultMessage = "Incorrect. The correct answer is " + correctAnswer;
                 }
+
+                // Display the result
+                document.getElementById("result-message").innerText = resultMessage;
 
                 // Move to the next question or end the quiz
                 currentQuestion++;
                 if (currentQuestion < questions.length) {
-                    document.getElementById("question-text").innerText = questions[currentQuestion].question;
-                    document.getElementById("answer-options").value = 0;
+                    setTimeout(function () {
+                        document.getElementById("question-text").innerText = questions[currentQuestion].question;
+                        document.getElementById("answer-options").value = 0;
+                        document.getElementById("result-message").innerText = ""; // Clear previous result
+                    }, 1000); // Delay for 1 second to show the result
                 } else {
                     document.getElementById("quiz-container").style.display = "none";
-                    document.getElementById("result-message").innerText = "Total Correct Answers: " + correctAnswers;
+                    displayQuizResults();
                 }
             } else {
                 document.getElementById("result-message").innerText = "Please select an answer.";
             }
-        </script>
+        }
+
+        function displayQuizResults() {
+            var resultMessage = "Quiz Results:";
+            resultMessage += "\nTotal Correct Answers: " + correctAnswers;
+            resultMessage += "\nIncorrect Answers: " + (questions.length - correctAnswers);
+            resultMessage += "\nIncorrect Question Numbers: " + (incorrectAnswers.length > 0 ? incorrectAnswers.join(", ") : "None");
+
+            alert(resultMessage); // You can customize this to display results in a different way if needed
+        }
+    </script>
 </body>
 </html>
