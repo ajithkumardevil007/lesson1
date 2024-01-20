@@ -22,6 +22,32 @@ The volume of gas left after cooling to room temperature is</p>
         </select>
         <button onclick="checkAnswer()">Submit</button>
     </div>
+    <div id="quiz-container2">
+        <p id="question-text">2. An element X has the following isotopic composition 200X = 90 %, 199X = 8 % and
+202X = 2 %. The weighted average atomic mass of the element X is closest to</p>
+        <select id="answer-options2">
+            <select id="answer-options" value="0">
+            <option value="0">Select an answer</option>
+            <option value="1">(a) 201 u</option>
+            <option value="2">(b) 202 u</option>
+            <option value="3">(c) 199 u</option>
+            <option value="4">(d) 200 u</option>
+        </select>
+        <button onclick="checkAnswer()">Submit</button>
+    </div>
+    <div id="quiz-container">
+        <p id="question-text">1. 40 ml of methane is completely burnt using 80 ml of oxygen at room temperature
+The volume of gas left after cooling to room temperature is</p>
+        <select id="answer-options">
+            <select id="answer-options" value="0">
+            <option value="0">Select an answer</option>
+            <option value="1">(a) 40 ml CO2 gas</option>
+            <option value="2">(b) 40 ml CO2 gas and 80 ml H2O gas</option>
+            <option value="3">(c) 60 ml CO2 gas and 60 ml H2O gas</option>
+            <option value="4">(d) 120 ml CO2 gas</option>
+        </select>
+        <button onclick="checkAnswer()">Submit</button>
+    </div>
 
     <div id="result-container">
         <p id="result-message"></p>
@@ -30,7 +56,9 @@ The volume of gas left after cooling to room temperature is</p>
     <script>
         var questions = [
             { question: "40 ml of methane is completely burnt using 80 ml of oxygen at room temperature.The volume of gas left after cooling to room temperature is", correctAnswer: 1 },
-            // Add more questions here...
+            { question: "An element X has the following isotopic composition 200X = 90 %, 199X = 8 % and202X = 2 %. The weighted average atomic mass of the element X is closest to", correctAnswer: 4 },
+            { question: "40 ml of methane is completely burnt using 80 ml of oxygen at room temperature.The volume of gas left after cooling to room temperature is", correctAnswer: 1 },
+            
         ];
 
         var currentQuestion = 0;
