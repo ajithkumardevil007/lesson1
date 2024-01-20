@@ -4,11 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Test</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        #quiz-container {
+            text-align: center;
+        }
+
+        #question-text {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        select, button {
+            font-size: 1em;
+            margin: 5px 0;
+        }
+
+        #result-container {
+            text-align: center;
+        }
+
+        #result-message {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #000; /* Change color as needed */
+        }
+    </style>
 </head>
 <body>
     <h1>Quiz Test</h1>
 
+    <div id="quiz-container">
+        <p id="question-text">What is the capital of France?</p>
+        <select id="answer-options" value="0">
+            <option value="0" disabled selected>Select an answer</option>
+            <option value="1">Berlin</option>
+            <option value="2">Madrid</option>
+            <option value="3">Paris</option>
+            <option value="4">Rome</option>
+        </select>
+        <button onclick="checkAnswer()">Submit</button>
+    </div>
 
     <div id="result-container">
         <p id="result-message"></p>
@@ -16,11 +66,11 @@
 
     <script>
         var questions = [
-            { question: "What is the capital of France?", correctAnswer: 3 },
-            { question: "Which planet is known as the Red Planet?", correctAnswer: 4 },
-            { question: "Who wrote 'Romeo and Juliet'?", correctAnswer: 2 },
-            { question: "What is the largest mammal in the world?", correctAnswer: 1 },
-            { question: "What is the currency of Japan?", correctAnswer: 3 },
+            { question: "What is the capital of France?", correctAnswer: 3, options: ["Berlin", "Madrid", "Paris", "Rome"] },
+            { question: "Which planet is known as the Red Planet?", correctAnswer: 4, options: ["Venus", "Earth", "Mars", "Jupiter"] },
+            { question: "Who wrote 'Romeo and Juliet'?", correctAnswer: 2, options: ["Jane Austen", "William Shakespeare", "Charles Dickens", "Emily Brontë"] },
+            { question: "What is the largest mammal in the world?", correctAnswer: 1, options: ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"] },
+            { question: "What is the currency of Japan?", correctAnswer: 3, options: ["Won", "Yuan", "Yen", "Ringgit"] },
         ];
 
         var currentQuestion = 0;
@@ -46,7 +96,13 @@
                 currentQuestion++;
                 if (currentQuestion < questions.length) {
                     document.getElementById("question-text").innerText = questions[currentQuestion].question;
-                    document.getElementById("answer-options").value = 0;
+
+                    // Dynamically populate options for the current question
+                    var answerOptions = document.getElementById("answer-options");
+                    answerOptions.innerHTML = '<option value="0" disabled selected>Select an answer</option>';
+                    for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+                        answerOptions.innerHTML += '<option value="' + (i + 1) + '">' + questions[currentQuestion].options[i] + '</option>';
+                    }
                 } else {
                     document.getElementById("quiz-container").style.display = "none";
                     displayQuizResults(resultMessage);
