@@ -8,7 +8,7 @@
     ];
 
     var currentQuestion = 0;
-    var Answers = 0;
+    var correctAnswers = 0;
     var incorrectAnswers = [];
 
     function initializeQuestion() {
@@ -30,7 +30,7 @@
 
             if (parseInt(selectedAnswer) === correctAnswer) {
                 correctAnswers++;
-                resultMessage = "Finished the first lesson!";
+                resultMessage = "Correct!";
             } else {
                 incorrectAnswers.push(currentQuestion + 1); // Save the incorrect question number
                 resultMessage = "Incorrect. The correct answer is " + correctAnswer;
